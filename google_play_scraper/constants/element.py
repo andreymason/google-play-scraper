@@ -144,7 +144,16 @@ class ElementSpecs:
         "lastUpdatedOn": ElementSpec(5, [1, 2, 145, 0, 0]),
         "updated": ElementSpec(5, [1, 2, 145, 0, 1, 0]),
         "version": ElementSpec(
-            5, [1, 2, 140, 0, 0, 0], fallback_value="Varies with device"
+            5,
+            [1, 2],
+            lambda s: (
+                # старый путь
+                (s[140][0][0][0] if isinstance(s, list) and len(s) > 140 and s[140] else None)
+                # новый путь (через -1 -> '141')
+                or (s[-1]['141'][0][0][0] if isinstance(s, list) and len(s) > 0 and isinstance(s[-1], dict) and '141' in s[-1] else None)
+                # fallback
+                or "Varies with device"
+            ),
         ),
         # "recentChanges": ElementSpec(5, [1, 2, 144, 1, 1], unescape_text),
         # "recentChangesHTML": ElementSpec(5, [1, 2, 144, 1, 1]),
