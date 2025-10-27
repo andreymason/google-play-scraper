@@ -16,7 +16,7 @@ I have referred a lot to the API design of this library.
 
 ## Installation
 ```
-pip install google-play-scraper
+pip install git+https://github.com/andreymason/google-play-scraper.git
 ```
 
 ## Usage
@@ -30,6 +30,10 @@ result = app(
     'com.nianticlabs.pokemongo',
     lang='en', # defaults to 'en'
     country='us' # defaults to 'us'
+	proxy={
+		"https": f"https://{user}:{password}@{host}:{port}",
+		"http": f"http://{user}:{password}@{host}:{port}",
+	} # Optional
 )
 ```
 
